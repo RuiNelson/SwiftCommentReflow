@@ -41,7 +41,7 @@ Binary path:
 
 ```bash
 swift build -c release
-install .build/release/swift-comment-reflow /usr/local/bin/swift-comment-reflow
+sudo install .build/release/swift-comment-reflow /usr/local/bin/swift-comment-reflow
 ```
 
 Then run:
