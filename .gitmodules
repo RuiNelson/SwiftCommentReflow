@@ -1,0 +1,3 @@
+[submodule "swift-glob"]
+	path = swift-glob
+	url = https://github.com/davbeck/swift-glob.git

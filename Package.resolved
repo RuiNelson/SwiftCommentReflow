@@ -1,0 +1,24 @@
+{
+  "originHash" : "6e03d083ef7ace64ddf38d0da5cf9380943b3c1533a0f0217c70ee30eae7253c",
+  "pins" : [
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "ca37474853a4b5f59a22c74bfdd449b1f6bc4cc2",
+        "version" : "1.8.1"
+      }
+    },
+    {
+      "identity" : "swift-glob",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davbeck/swift-glob.git",
+      "state" : {
+        "revision" : "f039a675d39ba178f710980a64dd0a142e83dcde",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
