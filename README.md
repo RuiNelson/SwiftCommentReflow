@@ -65,6 +65,7 @@ At least one reflow option is required:
 Additional options:
 
 - `-v`, `--verbose` report on each file changed
+- `-m`, `--mp <count>` maximum number of files processed concurrently (default: 10)
 
 Inputs can be:
 
@@ -107,7 +108,7 @@ swift run swift-comment-reflow --comments "Sources/**/*.swift"
 ## CLI Help
 
 ```text
-USAGE: swift-comment-reflow-cli <files> ... [--comments] [--blocks] [--docc] [--verbose]
+USAGE: swift-comment-reflow-cli <files> ... [--comments] [--blocks] [--docc] [--verbose] [--mp <count>]
 
 ARGUMENTS:
   <files>                 Files, directories, or glob patterns to reflow.
@@ -118,12 +119,14 @@ OPTIONS:
   -b, --blocks            Reflow /* ... */ block comments.
   -d, --docc              Reflow /// DocC comments.
   -v, --verbose           Report on each file changed.
+  -m, --mp <count>        Maximum number of files processed concurrently. (default: 10)
   -h, --help              Show help information.
 ```
 
 ## Behavior notes
 
 - The tool edits files in place.
+- Files are processed concurrently (up to 10 by default). Use `--mp` to adjust concurrency.
 - By default, the tool runs silently. Use `--verbose` to see which files were changed.
 - If no files match, the command exits with a validation error.
 - If no `-c`, `-b`, or `-d` flag is provided, the command exits with a validation error.
