@@ -62,6 +62,10 @@ At least one reflow option is required:
 - `-b`, `--blocks` reflow `/* ... */` block comments
 - `-d`, `--docc` reflow `///` DocC comments
 
+Additional options:
+
+- `-v`, `--verbose` report on each file changed
+
 Inputs can be:
 
 - File paths (`Sources/App/File.swift`)
@@ -103,7 +107,7 @@ swift run swift-comment-reflow --comments "Sources/**/*.swift"
 ## CLI Help
 
 ```text
-USAGE: swift-comment-reflow-cli <files> ... [--comments] [--blocks] [--docc]
+USAGE: swift-comment-reflow-cli <files> ... [--comments] [--blocks] [--docc] [--verbose]
 
 ARGUMENTS:
   <files>                 Files, directories, or glob patterns to reflow.
@@ -113,12 +117,14 @@ OPTIONS:
   -c, --comments          Reflow // line comments.
   -b, --blocks            Reflow /* ... */ block comments.
   -d, --docc              Reflow /// DocC comments.
+  -v, --verbose           Report on each file changed.
   -h, --help              Show help information.
 ```
 
 ## Behavior notes
 
 - The tool edits files in place.
+- By default, the tool runs silently. Use `--verbose` to see which files were changed.
 - If no files match, the command exits with a validation error.
 - If no `-c`, `-b`, or `-d` flag is provided, the command exits with a validation error.
 

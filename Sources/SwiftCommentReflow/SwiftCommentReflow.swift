@@ -34,6 +34,8 @@ struct SwiftCommentReflowCLI: AsyncParsableCommand {
         name: [.customShort("d"), .customLong("docc")],
         help: "Reflow /// DocC comments.",
     ) var onDocC = false
+    
+    @Flag(help: "Report on each file changed") var verbose = false
 
     /// Executes the command using the selected comment-type flags.
     func run() async throws {
@@ -116,7 +118,9 @@ extension SwiftCommentReflowCLI {
             try reflowed.write(to: file, atomically: true, encoding: String.Encoding.utf8)
         }
 
-        print("\(file.path(percentEncoded: false)) --- \(fileWasModified ? "changed" : "intact")")
+        if verbose {
+            print("\(file.path(percentEncoded: false)) --- \(fileWasModified ? "changed" : "intact")")
+        }
 
         return fileWasModified
     }
