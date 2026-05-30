@@ -108,6 +108,36 @@ struct Reflow {
             """
         #expect(reflow(e) == fe)
     }
+    
+    @Test func `respect ordered lists`() {
+        let a = """
+        1. a
+        2. b
+        """
+        let fa = a
+        #expect(reflow(a) == fa)
+        
+        let b = """
+        1. a
+        1. b
+        """
+        let fb = b
+        #expect(reflow(b) == fb)
+
+        let c = """
+        100. a
+        500. b
+        """
+        let fc = c
+        #expect(reflow(c) == fc)
+
+        let d = """
+          1. a
+          2. b
+        """
+        let fd = d
+        #expect(reflow(d) == fd)
+    }
 }
 
 

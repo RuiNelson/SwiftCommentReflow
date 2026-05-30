@@ -49,10 +49,12 @@ private func reflowInternal(_ input: String, collapseParagraphBreakBeforeLists: 
         }
         else {
             let startsWithDash = trimmedLine.first == "-"
-            let normalizedLine = startsWithDash
+            let startsWithOrderedList = trimmedLine.range(of: #"^\d+\."#, options: .regularExpression) != nil
+            let forceBreak = startsWithDash || startsWithOrderedList
+            let normalizedLine = forceBreak
                 ? line.trimmingTrailingWhitespace()
                 : trimmedLine
-            currentParagraph.append((normalizedLine, startsWithDash))
+            currentParagraph.append((normalizedLine, forceBreak))
         }
     }
 
