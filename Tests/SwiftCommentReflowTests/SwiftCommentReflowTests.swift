@@ -109,6 +109,41 @@ struct Reflow {
         #expect(reflow(e) == fe)
     }
     
+    @Test func `respect markdown tables`() {
+        let a = """
+        | H1 | H2 |
+        | --- | --- |
+        | A | B |
+        """
+        let fa = a
+        #expect(reflow(a) == fa)
+
+        let b = """
+        | H1 | H2 |
+        | :--- | ---: |
+        | A | B |
+        """
+        let fb = b
+        #expect(reflow(b) == fb)
+
+        let c = """
+        intro
+        | H1 | H2 |
+        | --- | --- |
+        | A | B |
+        outro
+        """
+        let fc = c
+        #expect(reflow(c) == fc)
+
+        let d = """
+          | A | B |
+          | C | D |
+        """
+        let fd = d
+        #expect(reflow(d) == fd)
+    }
+
     @Test func `respect ordered lists`() {
         let a = """
         1. a

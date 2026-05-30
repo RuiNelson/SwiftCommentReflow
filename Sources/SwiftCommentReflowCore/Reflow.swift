@@ -31,6 +31,7 @@ private func reflowInternal(_ input: String, collapseParagraphBreakBeforeLists: 
 
     var paragraphs: [[ParagraphLine]] = []
     var currentParagraph: [ParagraphLine] = []
+    var previousWasTable = false
 
     for rawLine in input.split(separator: "\n", omittingEmptySubsequences: false) {
         let line = String(rawLine)
@@ -41,16 +42,21 @@ private func reflowInternal(_ input: String, collapseParagraphBreakBeforeLists: 
                 paragraphs.append(currentParagraph)
                 currentParagraph.removeAll(keepingCapacity: true)
             }
+            previousWasTable = false
             continue
         }
 
         if currentParagraph.isEmpty {
+            previousWasTable = trimmedLine.first == "|"
             currentParagraph.append((line.trimmingTrailingWhitespace(), false))
         }
         else {
             let startsWithDash = trimmedLine.first == "-"
             let startsWithOrderedList = trimmedLine.range(of: #"^\d+\."#, options: .regularExpression) != nil
-            let forceBreak = startsWithDash || startsWithOrderedList
+            let startsWithTablePipe = trimmedLine.first == "|"
+            let exitingTable = !startsWithTablePipe && previousWasTable
+            let forceBreak = startsWithDash || startsWithOrderedList || startsWithTablePipe || exitingTable
+            previousWasTable = startsWithTablePipe
             let normalizedLine = forceBreak
                 ? line.trimmingTrailingWhitespace()
                 : trimmedLine
