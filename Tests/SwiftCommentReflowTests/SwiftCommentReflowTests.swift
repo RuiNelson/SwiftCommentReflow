@@ -173,6 +173,33 @@ struct Reflow {
         let fd = d
         #expect(reflow(d) == fd)
     }
+
+    @Test func `respect_lines_that_start_with_backticks`() {
+        let a = """
+        a
+        `b
+        """
+        let fa = a
+
+        #expect(reflow(a) == fa)
+
+        let b = """
+        a
+          `b
+        """
+        let fb = b
+
+        #expect(reflow(b) == fb)
+
+        let c = """
+        a
+        ```
+        b
+        """
+        let fc = c
+
+        #expect(reflow(c) == fc)
+    }
 }
 
 
