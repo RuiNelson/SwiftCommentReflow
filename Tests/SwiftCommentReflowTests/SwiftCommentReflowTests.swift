@@ -199,6 +199,13 @@ struct Reflow {
         let fc = c
 
         #expect(reflow(c) == fc)
+
+        let d = """
+        a. `b`.
+        """
+        let fd = d
+
+        #expect(reflow(d) == fd)
     }
 }
 
